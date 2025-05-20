@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #111;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
