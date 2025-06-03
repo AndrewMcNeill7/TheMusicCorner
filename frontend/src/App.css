@@ -1,24 +1,71 @@
+/* General body styles */
 body {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  margin: 0;
-  background: #f4f4f4;
-  color: #333;
+  font-family: Georgia, 'Times New Roman', Times, serif; /* Sets the font family for the entire page */
+  margin: 0; /* Removes default margin */
+  background: #f4f4f4; /* Light grey background color */
+  color: #333; /* Dark grey text color for better readability */
 }
 
+/* Styles for header and footer */
 header, footer {
-  background: white;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #ccc;
+  background: white; /* White background for header and footer */
+  padding: 1rem 2rem; /* Adds padding inside header and footer */
+  border-bottom: 1px solid #ccc; /* Light grey border at the bottom of header */
 }
 
+/* Specific styles for footer */
 footer {
-  text-align: center;
-  border-top: 1px solid #ccc;
-  margin-top: 2rem;
-  background-color: #111;
-  color: #eee;
+  text-align: center; /* Centers text in the footer */
+  border-top: 1px solid #ccc; /* Light grey border at the top of footer */
+  margin-top: 2rem; /* Adds space above footer */
+  background-color: #111; /* Dark background for footer */
+  color: #eee; /* Light grey text color in footer */
 }
 
+/* Main content area styles */
 main {
-  padding: 2rem;
+  padding: 2rem; /* Adds padding around the main content area */
+}
+
+/* Styles for the input form */
+.input-form {
+  position: relative; /* Allows for absolute positioning of child elements */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center elements horizontally */
+}
+
+/* Styles for the input field */
+.input-field {
+  width: 80%; /* Sets width of input to 80% */
+  padding: 10px 40px 10px 10px; /* Adds padding inside input */
+  font-size: 1rem; /* Sets font size */
+  position: relative; /* Allows for positioning of child elements */
+}
+
+/* Styles for the record button */
+.record-button {
+  position: absolute; /* Positions the button absolutely within its parent */
+  right: 12%; /* Positions the button 12% from the right side */
+  top: 50%; /* Centers the button vertically */
+  transform: translateY(-50%); /* Centers the button vertically */
+  border: none; /* Removes default button border */
+  background: none; /* Removes default button background */
+  cursor: pointer; /* Changes cursor to pointer when hovering over the button */
+}
+
+/* Styles for the image inside the record button */
+.record-button img {
+  width: 24px; /* Sets the width of the microphone icon */
+  height: 24px; /* Sets the height of the microphone icon */
+}
+
+/* Styles for the submit button */
+.submit-button {
+  padding: 10px; /* Adds padding inside the submit button */
+  margin-left: 10px; /* Adds space to the left of the submit button */
+}
+
+/* Styles for the response area */
+.response-area {
+  margin-top: 20px; /* Adds space above the response area */
 }
