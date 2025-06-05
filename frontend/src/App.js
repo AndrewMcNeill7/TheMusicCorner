@@ -149,7 +149,7 @@ function App() {
 
         {isRecording && (
           <p className="recording-status">
-            Recording... {recordingTime}s (max 30s)
+            Recording... {recordingTime}s (max 10s)
           </p>
         )}
 

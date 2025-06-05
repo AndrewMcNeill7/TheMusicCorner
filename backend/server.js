@@ -17,6 +17,7 @@ app.use(express.json());
 const upload = multer({ dest: 'uploads/' });
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY); // Use the API key from environment
 
+// === AUDIO PROCESSING ===
 app.post('/api/audio', upload.single('audio'), async (req, res) => {
   try {
     if (!req.file) {
@@ -32,11 +33,11 @@ app.post('/api/audio', upload.single('audio'), async (req, res) => {
     const { stdout: transcription } = await execPromise(`python transcribe.py ${wavPath}`);
     console.log("Transcription result:", transcription);
 
-    // Update model name here
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     const result = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: `Respond to this voice message: ${transcription}` }] }]
     });
+
     const response = await result.response;
     const text = response.text();
 
@@ -46,6 +47,27 @@ app.post('/api/audio', upload.single('audio'), async (req, res) => {
     res.json({ transcription: transcription.trim(), response: text });
   } catch (error) {
     console.error('Processing error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// === TEXT PROMPT PROCESSING ===
+app.post('/api/ask-ai', async (req, res) => {
+  try {
+    const { prompt } = req.body;
+    if (!prompt || !prompt.trim()) {
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const result = await model.generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }]
+    });
+
+    const response = await result.response;
+    res.json({ response: response.text() });
+  } catch (error) {
+    console.error('ask-ai error:', error);
     res.status(500).json({ error: error.message });
   }
 });
