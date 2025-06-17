@@ -1,15 +1,9 @@
 // src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-<<<<<<< HEAD
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import './Components/CSS/Home.css';
-=======
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
->>>>>>> parent of f5acdfb (Project Progress 06.12.2025)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
