@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../Components/CSS/Home.css';
 import Header from '../Components/UI/Header';
+import Footer from '../Components/UI/Footer';
 import microphoneIcon from '../Images/Microphone.png';
 
 function Home() {
@@ -166,9 +167,7 @@ function Home() {
           )}
         </div>
       </main>
-      <footer>
-        <p>&copy; The Music Corner</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

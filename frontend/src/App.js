@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 import SignIn from './Pages/SignIn';
 import Home from './Pages/Home';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Simulate checking for authentication
     useEffect(() => {
         const checkAuth = () => {
             const user = localStorage.getItem('user');
@@ -22,13 +23,15 @@ const App = () => {
     };
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/signin" element={<SignIn onLogin={handleLogin} />} />
-                <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/signin" />} />
-                <Route path="/" element={<Navigate to="/signin" />} />
-            </Routes>
-        </Router>
+        <GoogleOAuthProvider clientId="306349675912-sj289qifcqovpnmu4knp2ljp2bmua8sa.apps.googleusercontent.com">
+            <Router>
+                <Routes>
+                    <Route path="/signin" element={<SignIn onLogin={handleLogin} />} />
+                    <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/signin" />} />
+                    <Route path="/" element={<Navigate to="/signin" />} />
+                </Routes>
+            </Router>
+        </GoogleOAuthProvider>
     );
 };
 
