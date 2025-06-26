@@ -4,6 +4,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 import SignIn from './Pages/SignIn';
 import Home from './Pages/Home';
+import Profile from './Pages/Profile'; // ✅ Import the new Profile page
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,6 +29,7 @@ const App = () => {
                 <Routes>
                     <Route path="/signin" element={<SignIn onLogin={handleLogin} />} />
                     <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/signin" />} />
+                    <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/signin" />} />
                     <Route path="/" element={<Navigate to="/signin" />} />
                 </Routes>
             </Router>

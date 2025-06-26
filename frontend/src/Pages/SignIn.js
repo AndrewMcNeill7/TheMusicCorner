@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import '../Components/CSS/SignIn.css';
 import Footer from '../Components/UI/Footer';
+import jwt_decode from 'jwt-decode';
+
 
 const SignIn = ({ onLogin }) => {
     const navigate = useNavigate();

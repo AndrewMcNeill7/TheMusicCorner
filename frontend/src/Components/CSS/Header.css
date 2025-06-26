@@ -8,6 +8,8 @@
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
+  text-decoration: none; /* Ensures no underline on logo link */
+  color: #111;
 }
 
 nav a {
@@ -18,5 +20,5 @@ nav a {
 }
 
 nav a:hover {
-  text-decoration: underline;
+  text-decoration: none; /* Removes underline on hover */
 }

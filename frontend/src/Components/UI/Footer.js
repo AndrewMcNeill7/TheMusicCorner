@@ -1,6 +1,6 @@
 // src/Components/UI/Footer.js
 import React from 'react';
-import '../CSS/Home.css'; // ✅ correct
+import '../CSS/Footer.css';
 
 function Footer() {
   return (

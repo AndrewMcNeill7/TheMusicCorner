@@ -1,4 +1,14 @@
 /* ===== Global Styles ===== */
+html, body {
+  overflow-y: scroll;           /* Keep scroll functionality */
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari, Opera */
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -56,9 +66,9 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;         /* Center input horizontally */
+  align-items: center;
   max-width: 100%;
-  margin: 0 auto;              /* Center form container if limited width */
+  margin: 0 auto;
 }
 
 .input-field {
@@ -179,17 +189,6 @@ h1 {
   text-align: center;
   font-style: italic;
   color: #666;
-}
-
-/* ===== Footer Styling ===== */
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  background-color: black;
-  margin-top: auto;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-top: 1px solid #ddd;
 }
 
 /* ===== Icon/Image inside Buttons ===== */
