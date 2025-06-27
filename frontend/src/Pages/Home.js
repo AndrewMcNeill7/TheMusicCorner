@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../Components/CSS/Home.css';
 import Header from '../Components/UI/Header';
 import Footer from '../Components/UI/Footer';
+import '../Components/CSS/Home.css';
 import microphoneIcon from '../Images/Microphone.png';
 
 function Home() {
@@ -10,18 +10,40 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
+
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const timerRef = useRef(null);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userId = user?.payload?.sub;
+
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
-      if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      if (mediaRecorderRef.current?.state === 'recording') {
         mediaRecorderRef.current.stop();
       }
     };
   }, []);
+
+  const savePromptHistory = async (prompt, responseText) => {
+    if (!userId) return;
+    try {
+      await fetch('http://localhost:3001/api/save-history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId,
+          prompt,
+          response: responseText,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch (err) {
+      console.error('Failed to save history:', err);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,15 +53,18 @@ function Home() {
     setResponse('');
 
     try {
-      const res = await fetch('http://localhost:3001/api/ask-ai', {
+      const aiRes = await fetch('http://localhost:3001/api/ask-ai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt }),
       });
 
-      if (!res.ok) throw new Error('API request failed');
-      const data = await res.json();
-      setResponse(data.response);
+      if (!aiRes.ok) throw new Error('API request failed');
+
+      const { response: aiResponse } = await aiRes.json();
+
+      setResponse(aiResponse);
+      await savePromptHistory(prompt, aiResponse);
     } catch (error) {
       console.error(error);
       setResponse(`Error: ${error.message}`);
@@ -64,20 +89,19 @@ function Home() {
         clearInterval(timerRef.current);
         const audioBlob = new Blob(audioChunksRef.current);
         await processAudioBlob(audioBlob);
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       };
 
       mediaRecorderRef.current.start();
       timerRef.current = setInterval(() => {
-        setRecordingTime(prev => prev + 1);
+        setRecordingTime((prev) => prev + 1);
       }, 1000);
 
-      // Auto-stop after 10 seconds
       setTimeout(() => {
         if (mediaRecorderRef.current?.state === 'recording') {
           mediaRecorderRef.current.stop();
         }
-      }, 10000);
+      }, 10000); // Auto-stop after 10s
     } catch (err) {
       console.error('Recording error:', err);
       setResponse(`Error: ${err.message}`);
@@ -106,8 +130,9 @@ function Home() {
 
       if (!res.ok) throw new Error('Audio processing failed');
       const data = await res.json();
-      setResponse(data.response);
       setPrompt(data.transcription || '');
+      setResponse(data.response);
+      await savePromptHistory(data.transcription, data.response);
     } catch (err) {
       console.error(err);
       setResponse(`Error: ${err.message}`);
@@ -142,7 +167,11 @@ function Home() {
               <img src={microphoneIcon} alt="Record" />
               {isRecording && <span className="recording-dot"></span>}
             </button>
-            <button type="submit" className="submit-button" disabled={loading || !prompt.trim()}>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={loading || !prompt.trim()}
+            >
               {loading ? 'Processing...' : 'Submit'}
             </button>
           </div>
