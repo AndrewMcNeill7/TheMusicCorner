@@ -39,13 +39,13 @@ app.post('/api/audio', upload.single('audio'), async (req, res) => {
 
     // Always accept any transcription and generate playlist
     const systemPrompt = `
-You are a helpful music assistant.
-Respond with a playlist of 10 songs inspired by the user's prompt.
-Format as a numbered list:
-1. Title - Artist
-2. ...
-No commentary.
-`;
+      You are a helpful music assistant.
+      Respond with a playlist of 10 songs inspired by the user's prompt.
+      Format as a numbered list:
+      1. Title - Artist
+      2. ...
+      No commentary.
+      `;
 
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     const result = await model.generateContent({
@@ -81,13 +81,13 @@ app.post('/api/ask-ai', async (req, res) => {
     if (!prompt || !prompt.trim()) return res.status(400).json({ error: 'Prompt is required' });
 
     const systemPrompt = `
-You are a helpful music assistant.
-Respond with a playlist of 10 songs inspired by the user's prompt.
-Format as a numbered list:
-1. Title - Artist
-2. ...
-No commentary.
-`;
+      You are a helpful music assistant.
+      Respond with a playlist of 10 songs inspired by the user's prompt.
+      Format as a numbered list:
+      1. Title - Artist
+      2. ...
+      No commentary.
+      `;
 
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
     const result = await model.generateContent({

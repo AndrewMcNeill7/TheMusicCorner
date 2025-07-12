@@ -157,13 +157,13 @@ function Home() {
     <div className="App">
       <Header />
       <main>
-        <h1>Ask the AI</h1>
+        <h1>Ask the Music Corner</h1>
         <form onSubmit={handleSubmit} className="input-form">
           <input
             type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Enter Any Prompt To Have A Playlist Created For That Prompt"
+            placeholder="Enter Any Prompt To Have A 10 Song Playlist Created"
             className="input-field"
             disabled={loading}
           />
@@ -193,7 +193,7 @@ function Home() {
         )}
 
         <div className="response-area">
-          <h2>AI Playlist:</h2>
+          <h2>Recommended Playlist:</h2>
           {loading ? (
             <div className="loader">Loading...</div>
           ) : (
