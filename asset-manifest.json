@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TheMusicCorner/static/css/main.c3343928.css",
+    "main.js": "/TheMusicCorner/static/js/main.463142a8.js",
+    "static/js/453.8ab44547.chunk.js": "/TheMusicCorner/static/js/453.8ab44547.chunk.js",
+    "index.html": "/TheMusicCorner/index.html",
+    "main.c3343928.css.map": "/TheMusicCorner/static/css/main.c3343928.css.map",
+    "main.463142a8.js.map": "/TheMusicCorner/static/js/main.463142a8.js.map",
+    "453.8ab44547.chunk.js.map": "/TheMusicCorner/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c3343928.css",
+    "static/js/main.463142a8.js"
+  ]
+}
