@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "homepage": "https://AndrewMcNeill.github.io/TheMusicCorner",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001",
